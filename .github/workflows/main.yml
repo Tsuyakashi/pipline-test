@@ -42,4 +42,4 @@ jobs:
         - name: Connect and deploy with SSH
           run: |
             ssh -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}
-            sudo ~/deploy.sh
+            sudo /home/${{ secrets.USERNAME }}/deploy.sh

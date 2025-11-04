@@ -41,5 +41,14 @@ jobs:
             SSH_KEY_PATH: ~/.ssh/private.key
         - name: Connect and deploy with SSH
           run: |
-            ssh -tt -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}
-            sudo /home/frontend/deploy.sh
+            ssh -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}<<EOT
+              echo "Stop container"
+              sudo docker stop frontend
+              sudo docker rm frontend
+              sudo docker image rm tsuyakashi/pipline-test
+              echo "Pull image"
+              sudo docker pull tsuyakashi/pipline-test
+              echo "Start frontend container"
+              sudo docker run -d -p 80:8080 --name frontend tsuyakashi/pipline-test
+              echo "Finish deploying!"
+            EOT

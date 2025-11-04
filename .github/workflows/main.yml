@@ -41,5 +41,5 @@ jobs:
             SSH_KEY_PATH: ~/.ssh/private.key
         - name: Connect and deploy with SSH
           run: |
-            ssh -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}
+            ssh -tt -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}
             sudo /home/frontend/deploy.sh

@@ -42,17 +42,4 @@ jobs:
         - name: Connect and deploy with SSH
           run: |
             ssh -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}
-            sudo tee -a ~/deploy.sh> /dev/null <<EOF
-              #!/bin/bash
-              echo "Stop container"
-              docker stop frontend
-              docker rm frontend
-              docker image rm tsuyakashi/pipline-test
-              echo "Pull image"
-              docker pull tsuyakashi/pipline-test
-              echo "Start frontend container"
-              docker run -d -p 80:8080 --name frontend tsuyakashi/pipline-test
-              echo "Finish deploying!"
-            EOF
-            sudo chmod +x deploy.sh
-            sudo ~/deploy.sh
+            sudo /home/frontend/deploy.sh

@@ -1,5 +1,5 @@
 #!/bin/bash
-udo yum update && sudo upgrade -y
+sudo yum update && sudo upgrade -y
 echo "Install docker & git" && sudo yum install docker git -y
 echo "Start docker daemon" && sudo systemctl start docker
 echo "Pull image"&& sudo docker pull tsuyakashi/pipline-test

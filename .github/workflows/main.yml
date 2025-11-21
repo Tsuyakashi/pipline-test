@@ -20,6 +20,12 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push Docker image
         run: |
+          git clone https://github.com/StartBootstrap/startbootstrap-creative.git
+          mv startbootstrap-creative/scripts ./
+          mv startbootstrap-creative/src ./
+          mv startbootstrap-creative/package-lock.json ./
+          mv startbootstrap-creative/package.json ./
+
           docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_NAME }} .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_NAME }}
   
@@ -42,13 +48,9 @@ jobs:
         - name: Connect and deploy with SSH
           run: |
             ssh -i "~/.ssh/private.key" ${{ secrets.USERNAME }}@${{ secrets.SERVER_HOST }}<<EOT
-              echo "Stop container"
               sudo docker stop frontend
               sudo docker rm frontend
               sudo docker image rm tsuyakashi/pipline-test
-              echo "Pull image"
               sudo docker pull tsuyakashi/pipline-test
-              echo "Start frontend container"
               sudo docker run -d -p 80:8080 --name frontend tsuyakashi/pipline-test
-              echo "Finish deploying!"
             EOT

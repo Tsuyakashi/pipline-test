@@ -1,22 +1,22 @@
 # Pipline to AWS EC2
+### Test repo to make yml for pipline in GitHub Actions
 ## How to use:
-
-- launch new EC2 instance   
-- add access from http/https from net
-- startup with setup.sh
-- update codespace secrets:
-    - USERNAME
-    - SERVER_HOST
-    - SSH_KNOWN_HOSTS
-    - SSH_PRIVATE_KEY
-    - DOCKER_USERNAME
-    - DOCKER_REPO_NAME
-    - DOCKER_PASSWORD
-- with pushing frontend edits it will be applied on server by github actions
+### 1. Launch AWS EC2 instance (ssh access needed)
+### 2. Startup with `quickstart.sh`
+### 3. Update GitHub secrets:
+- USERNAME
+- SERVER_HOST
+- SSH_KNOWN_HOSTS
+- SSH_PRIVATE_KEY
+### And DockerHub credentials (also in GitHub secrets)    
+- DOCKER_USERNAME
+- DOCKER_PASSWORD
+- DOCKER_REPO_NAME
+### 4. With pushing to main, pipline start
 
 ## Used:
 - nodejs & npm with startbootstrap creative/agency as front
-- docker with node to build static & nginx to show
+- docker with node-alpine to build static & nginx to show
 - dockerhub to store image
 - .sh to configure
 - github actions for pipline
@@ -27,5 +27,3 @@
 - startbootstrap themes:
     - [starbootstrap-creative](https://startbootstrap.com/theme/creative)
     - [starbootstrap-agency](https://startbootstrap.com/theme/agency)
-- configure domain: https://habr.com/ru/amp/publications/716002/
-- DuckDNS: https://www.duckdns.org/
